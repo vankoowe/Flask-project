@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Log in</title>
-	<link rel="stylesheet" type ="text/css" href="style.css">
-</head>
-<body>
-		<div class="container">
-				<h1>Log in</h1>
-			<hr>
-				<label for="email">Email</label>
-				<input type="text" placeholder="Enter Email" name="email" required>
+{% extends 'base.html' %}
 
-				<label for="password">Password</label>
-				<input type="password" placeholder="Enter Password" name="password" required>
+{% block head %}
+<title>Log in</title>
+{% endblock %}
 
-			<hr>
-			<button type="submit" class="registerid"><font size = "4">Log in</button>
-			<p>Don't have an account? <a href="register.html">Register</a>.</p>
-		</div>
+{% block body %}
+<div class="container">
+	<h1>Log in</h1>
+		<hr>
+			<label for="email">Email</label>
+			<input type="text" placeholder="Enter Email" name="email" required>
 
-</body>
-</html>
+			<label for="password">Password</label>
+			<input type="password" placeholder="Enter Password" name="password" required>
+
+		<hr>
+		<button type="submit" class="registerid"><font size = "4">Log in</button>
+	<p>Don't have an account? <a href="register.html">Register</a>.</p>
+</div>
+{% endblock %}
