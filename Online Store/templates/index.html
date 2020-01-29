@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<ul class="nav">
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('login') }}">Log In</a></li>
+    <li><a href="{{ url_for('register') }}">Register</a></li>
+    <li><a href="offers.html">Offers</a></li>
+    <li><a href="offers.html">Bought Items</a></li>
+</ul>
+
+<p>
+    Hello guys, welcome to our brand new store's website.
+    If you don't have an account you can use the button 
+    above to register. If you already have an account you
+    can use the other button above to log in. If you need help
+    you can contact the site support.     
+</p>
+        
+{% endblock %}

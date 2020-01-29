@@ -1,13 +1,18 @@
-from flask import Flask, render_template, url_for, request
-#from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, url_for, request, redirect
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-#db = SQLAlchemy(app)
 
 @app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        return redirect(url_for('login'))
+
     return render_template('register.html')
+    
  
 @app.route('/login', methods=['GET', 'POST'])
 def login():
