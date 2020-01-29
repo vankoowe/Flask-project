@@ -27,6 +27,6 @@
         <input type="text" placeholder="Enter Phone number" name="phone-number" required>
     <hr>
     <button type="submit" class="registerid"><font size = "4">Register</button>
-    <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a>.</p>
 </div>
 {% endblock %}
