@@ -15,7 +15,7 @@ conn.cursor().execute('''CREATE TABLE IF NOT EXISTS users
     )
 ''')
 
-conn.cursor().execute('''CREATE TABLE IF NOT EXISTS offers
+conn.cursor().execute('''CREATE TABLE IF NOT EXISTS offer
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
