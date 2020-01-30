@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>New offer</title>
+{% endblock %}
+
+{% block body %}
+<ul class="nav">
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('login') }}">Log In</a></li>
+    <li><a href="{{ url_for('register') }}">Register</a></li>
+    <li><a href="{{ url_for('offers') }}">Offers</a></li>
+    <li><a href="{{ url_for('offers') }}">Bought Items</a></li>
+</ul> 
+
+<div class="container" action="/offers/new_offer" method="post">
+    <h1>New offer</h1>
+        <hr>
+            <label for="user_id">ID</label>
+            <input type="number" placeholder="Enter iD" name="user_id" required>
+
+            <label for="title">Title</label>
+            <input type="text" placeholder="Enter Title" name="title" required>
+
+            <label for="description">Description</label>
+            <input type="text" placeholder="Enter Description" name="description" required>
+
+            <label for="price">Price</label>
+            <input type="number" placeholder="Enter Price[$]" name="price" required>
+
+            <label for="date">Date</label>
+            <input type="date" placeholder="Enter Date" name="date" required>
+
+            <label for="email">Publisher's email</label>
+            <input type="email" placeholder="Enter Publisher's email" name="email" required>
+
+        <hr>
+        <button type="submit" class="registerid"><font size = "4">New Offer Submit</button>
+    
+</div>
+
+{% endblock %}

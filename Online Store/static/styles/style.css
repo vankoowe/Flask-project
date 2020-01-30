@@ -10,7 +10,7 @@ body {
 * {
   box-sizing: border-box;
 }
-
+  
 .container {
   width: 100%;
   max-width: 500px;
@@ -23,8 +23,8 @@ body {
   background-color: white;
   border-radius: 5px;
 }
-
-input[type=text], input[type=password] {
+  
+input[type=text], input[type=password], input[type=number], input[type=date], input[type=email] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 18px 0;
@@ -32,21 +32,21 @@ input[type=text], input[type=password] {
   border: none;
   background: #f1f1f1;
 }
-
+  
 h1{
   text-align: center;
   margin-top: 0px;
   margin-bottom: 30px;
 }
-
+  
 label{
   font-weight: bold;
 }
-
+  
 hr {
   border: 2px solid #f1f1f1;
 }
-
+  
 .registerid {
   background-color: #d742f5;
   color: white;
@@ -57,7 +57,7 @@ hr {
   width: 100%;
   opacity: 0.9;
 }
-
+    
 .nav{
   border: none;
   border-width:1px 0;
@@ -67,10 +67,11 @@ hr {
   text-align:center;
   background-color: #333;
 }
+
 .nav li{
   display:inline;
 }
-
+    
 .nav a{
   display: inline-block;
   padding: 14px 16px;
@@ -78,13 +79,37 @@ hr {
   text-align: center;
   color: aliceblue;
 }
-
+    
 li a:hover {
   background-color: #111;
 }
-
+    
 p{
   color: #333;
   text-align: center;
   margin: 5%;
+}
+
+table, td, th {  
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+tr{
+  background-color: #f2f2f2
+}
+
+th {
+  background-color: #3366ff;
+  color: white;
 }
