@@ -1,16 +1,18 @@
 from database import DataBase
 from user import User
+from datetime import date
 
 class Offer:
-    def __init__(self, id, title, description, price, date, active, buyer_id, seller_id):
+    def __init__(self, id, title, description, price, seller_id, date=date.today(), active=1, buyer_id=0):
         self.id = id
         self.title = title
         self.description = description
         self.price = price
+        self.seller_id = seller_id
         self.date = date
         self.active = active
         self.buyer_id = buyer_id
-        self.seller_id = seller_id
+        
 
     @staticmethod
     def all():
@@ -73,10 +75,10 @@ class Offer:
 
     def create(self):
         with DataBase() as db:
-            values = (self.title, self.description, self.price, self.date, self.active, self.buyer_id, self.seller_id)
+            values = (self.id, self.title, self.description, self.price,self.seller_id, self.date, self.active, self.buyer_id)
             db.execute('''
-                INSERT INTO offer (title, description, price, date, active, buyer_id, seller_id)
-                VALUES (?, ?, ?, ?, ?, ?, ?)''', values)
+                INSERT INTO offer (id, title, description, price, seller_id, date, active, buyer_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', values)
             return self
 
     def buy(self, buyer_id):

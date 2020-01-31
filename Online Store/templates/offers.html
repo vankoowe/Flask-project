@@ -5,16 +5,9 @@
 {% endblock %}
   
 {% block body %}
-<ul class="nav">
-  <li><a href="{{ url_for('index') }}">Home</a></li>
-  <li><a href="{{ url_for('login') }}">Log In</a></li>
-  <li><a href="{{ url_for('register') }}">Register</a></li>
-  <li><a href="{{ url_for('offers') }}">Offers</a></li>
-  <li><a href="{{ url_for('offers') }}">Bought Items</a></li>
-</ul> 
 
-<a href="/offers/new_offer" method='POST'>
-  <button type="submit" 
+  {% if user != None %}
+  <button onclick="location.href='/offers/new_offer/{{ User.id }}/'" type="submit" 
     style="background-color: coral;
     border: none;
     color: white;
@@ -24,29 +17,29 @@
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    cursor: pointer;border-radius: 4px;right: 70%">
-    <font size = "4">New Offer</button></a>
+    cursor: pointer;border-radius: 4px;right: 70%" >
+    <font size = "4">New Offer</button>
+    {% endif %}
 <p style="color: black;margin: 3%;">
   <font size="7">Offers</font></p>
 
-  <table>
+<table>
   <tr>
-    <th>ID_NUM</th>
     <th>TITLE</th>
     <th>DESCRIPTION</th>
     <th>PRICE</th>
     <th>DATE</th> 
-    <th>PUBLISHER'S EMAIL</th>   
   </tr>
   {% for offer in offers %}
-  <a href="/offers/{{ offers.id }}"></a><tr>
-    <td>{{ offers.user_id }}</td>
-    <td>{{ offers.title }}</td>
-    <td>{{ offers.description }}</td>
-    <td>{{ offers.price }}</td>
-    <td>{{ offers.data }}</td>
-    <td>{{ offers.email }}</td>
-  </tr></a>
+  <tr>
+    <td>{{ offer.title }}</td>
+    <td>{{ offer.description }}</td>
+    <td>{{ offer.price }}</td>
+    <td>{{ offer.date }}</td>
+    {% if User.id == offer.seller_id %}
+    <form action="/{{ offer.id }}/delete/" method="post"><td><button>Delete</button></td></form>
+    {% endif %}
+  </tr>
   {% endfor %}
   
 </table>

@@ -4,32 +4,53 @@ from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSign
 
 class User(object):
 
-    def __init__(self, id, email, password, username, address, phone_number):
+    def __init__(self, id, email, password, name, address, phone_number):
         self.id = id
         self.email = email
         self.password = password
-        self.username = username
+        self.name = name
         self.address = address
         self.phone_number = phone_number
 
     def create(self):
         with DataBase() as db:
-            values = (self.email,
-                      self.password,
-                      self.name,
-                      self.adress,
-                      self.phone)
-            db.execute('''INSERT INTO users (email, password, username, address, phone_number)
-            	VALUES (?, ?, ?, ?, ?)''', values)
+            values = (self.id,
+                        self.email,
+                        self.password,
+                        self.name,
+                        self.address,
+                        self.phone_number)
+            db.execute('''INSERT INTO users (id, email, password, name, address, phone_number)
+            	VALUES (?, ?, ?, ?, ?, ?)''', values)
             return self
 
     @staticmethod    
     def hash_password(password):
         return hashlib.sha256(password.encode('utf-8')).hexdigest()
-
-    def verify_password(self, password):
-        return self.password == hashlib.sha256(password.encode('utf-8')).hexdigest()
     
+    @staticmethod
+    def get_user(id):
+        with DataBase() as db:
+            values = db.execute(
+                '''
+                    SELECT * FROM users
+                    WHERE id=?
+                ''', (id,)
+            ).fetchone()
+
+        return User(*values)
+
+    @staticmethod
+    def get_user_by_email(email):
+        with DataBase() as db:
+            id = db.execute(
+                '''
+                    SELECT id FROM users
+                    WHERE email=?
+                ''', (email,)).fetchone()
+
+        return id[0]
+
     @staticmethod
     def find_by_email(email):
         with DataBase() as db:
@@ -45,7 +66,7 @@ class User(object):
             return User(*row)
 
     def generate_token(self):
-        s = Serializer(SECRET_KEY, expires_in=600)
+        s = Serializer(SECRET_KEY, expires_in=300)
         return s.dumps({'name' : self.name})
     
     @staticmethod

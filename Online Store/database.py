@@ -21,10 +21,10 @@ conn.cursor().execute('''CREATE TABLE IF NOT EXISTS offer
         title TEXT NOT NULL,
         description TEXT,
         price INTEGER NOT NULL,
+        seller_id INTEGER,
         date TEXT NOT NULL,
         active INTEGER NOT NULL,
         buyer_id INTEGER NOT NULL,
-        seller_id INTEGER,
         FOREIGN KEY(buyer_id) REFERENCES users(id),
         FOREIGN KEY(seller_id) REFERENCES users(id)
     )
