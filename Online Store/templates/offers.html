@@ -29,6 +29,17 @@
     <th>DESCRIPTION</th>
     <th>PRICE</th>
     <th>DATE</th> 
+    {% if User.id == offers.buyer_id %}
+    {% if User.id != offers.seller_id %}
+    <th>BUY</th>
+    {% endif %}
+    {% endif %}
+    {% if User.id != offers.seller_id %}
+    {% if User.id != offers.buyer_id %}
+    <th>DELETE</th>
+    <th>UPDATE</th>
+    {% endif %}
+    {% endif %}
   </tr>
   {% for offer in offers %}
   <tr>
@@ -36,8 +47,16 @@
     <td>{{ offer.description }}</td>
     <td>{{ offer.price }}</td>
     <td>{{ offer.date }}</td>
+    {% if User.id != offer.seller_id %}
+    {% if User.id != offer.buyer_id %}
+    <form action="/{{ offer.id }}/buy/" method="post"><td><button>Buy</button></td></form>
+    {% endif %}
+    {% endif %}
+    {% if User.id != offer.buyer_id %}
     {% if User.id == offer.seller_id %}
     <form action="/{{ offer.id }}/delete/" method="post"><td><button>Delete</button></td></form>
+    <form action="/{{ offer.id }}/update/" method="post"><td><button>Update</button></td></form>
+    {% endif %}
     {% endif %}
   </tr>
   {% endfor %}

@@ -54,6 +54,20 @@ def new_offer(id):
 
         return redirect('/offers/{}/'.format(id))
 
+@app.route('/<int:id>/new_offer/', methods=['GET', 'POST'])
+def edit_offer(id):
+    offer - Offer.find(id)
+    if request.method == "GET":
+        return render_template("edit_offer.html", User=User.get_user(id), offers=Offer.find(id_ad))
+    elif request.method =="POST":
+        offer.title = request.form['title'],
+        offer.description = request.form['description'],
+        offer.price = request.form['price'],
+        offer.date = request.form['date']
+        offer.save()
+        
+        return redirect('/{}/'.format(id))
+
 @app.route('/<int:id>/delete/', methods=['POST'])
 def delete(id):
     offer = Offer.find(id)

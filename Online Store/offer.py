@@ -21,13 +21,6 @@ class Offer:
             return [Offer(*row) for row in rows]
 
     @staticmethod
-    def sold_ads(id):
-        with DataBase() as db:
-            values = (id,)
-            rows = db.execute('SELECT * FROM offer WHERE seller_id = ? AND active = 0', values).fetchall()
-            return [Offer(*row) for row in rows]
-
-    @staticmethod
     def find(id):
         with DataBase() as db:
             row = db.execute(
@@ -35,43 +28,6 @@ class Offer:
                 (id,)
             ).fetchone()
             return Offer(*row)
-
-    @staticmethod
-    def find_by_seller_id(seller_id):
-        with DataBase() as db:
-            rows = db.execute(
-                'SELECT * FROM offer WHERE seller_id = ?',
-                (seller_id,)
-            ).fetchall()
-            return [Offer(*row) for row in rows]
-
-    @staticmethod
-    def seller_name_by_id(seller_id):
-        with DataBase() as db:
-            name = db.execute(
-                'SELECT name FROM users WHERE id = ?',
-                (seller_id,)
-            ).fetchone()
-            return name[0]
-
-    @staticmethod
-    def buyer_name_by_id(buyer_id):
-        with DataBase() as db:
-            name = db.execute(
-                'SELECT name FROM users WHERE id = ?',
-                (buyer_id,)
-            ).fetchone()
-            return name[0]
-
-    @staticmethod
-    def buyer_info_by_id(buyer_id):
-        with DataBase() as db:
-            row = db.execute(
-                'SELECT * FROM users WHERE id = ?',
-                (buyer_id,)
-            ).fetchone()
-            return User(*row)       
-
 
     def create(self):
         with DataBase() as db:
@@ -88,6 +44,15 @@ class Offer:
             self.active = 0
             self.buyer_id = buyer_id
             return self
+
+    # def edit_offer(self):
+    # with DB() as db:
+    #     db.execute(
+    #         '''
+    #             UPDATE ads SET title = ?, description = ?, price = ?
+    #             WHERE id = ? 
+    #         ''', self.title, self.description, self.price, self.id)
+    #     return self
 
     def delete(self):
         with DataBase() as db:

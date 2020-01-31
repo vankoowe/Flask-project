@@ -51,20 +51,6 @@ class User(object):
 
         return id[0]
 
-    @staticmethod
-    def find_by_email(email):
-        with DataBase() as db:
-            row = db.execute('SELECT * FROM users WHERE email = ?', (email, )).fetchone()
-            return User(*row)
-
-    @staticmethod
-    def find_by_name(name):
-        if not name:
-            return None
-        with DataBase() as db:
-            row = db.execute('SELECT * FROM users WHERE name = ?', (name, )).fetchone()
-            return User(*row)
-
     def generate_token(self):
         s = Serializer(SECRET_KEY, expires_in=300)
         return s.dumps({'name' : self.name})
